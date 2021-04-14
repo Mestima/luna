@@ -1,2 +1,2 @@
-# UnitedLuna
- Luna (United Luna) is a Discord Bot written in various languages
+# Luna Discord
+ Luna is a Discord Bot written in various languages
