@@ -6,7 +6,7 @@ var clear = (msg, text) => {
 	if (!msg.guild)
 		return msg.reply('You can\'t use this command in direct messages!');
 	
-	if (!msg.member.hasPermission("ADMINISTRATOR"))
+	if (!msg.member.permissions.has("ADMINISTRATOR"))
 		return msg.reply('You have to be a server admin to use this command!');
 	
 	let amount = text[1];
@@ -31,7 +31,7 @@ var clear = (msg, text) => {
 //		.setFooter('Luna')
 //		.setTimestamp()
 		
-	msg.channel.send(embed);
+	msg.channel.send({ embeds: [embed] });
 };
 
 module.exports = clear;
