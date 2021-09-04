@@ -6,6 +6,7 @@ const pbGet = require('./pastebin');
 const clear = require('./clear');
 const { tag } = require('./tags');
 const play = require('./music');
+const lua = require('./lua');
 // const tgPost = require('./telegraph');
 
 const commands = {
@@ -23,7 +24,8 @@ const commands = {
 	tag: {func: (cl, msg, text) => {tag(msg, text);}, descExt: [
 		{cmd: 'tag list', desc: 'show tags list'},
 		{cmd: 'tag `name`', desc: 'send tag'}
-	], category: 'Tags'}
+	], category: 'Tags'},
+	lua: {func: (cl, msg, text) => {lua(msg, text);}, desc: 'Execute lua code', category: 'Programming stuff'}
 //	tgpost: {func: (cl, msg, text) => {tgPost(msg, text);}, desc: 'post an article to telegra.ph', category: 'APIs'}
 };
 module.exports.commands = commands;
