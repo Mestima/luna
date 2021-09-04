@@ -36,7 +36,7 @@ var helpSetup = (cmds) => {
 };
 
 var help = (msg) => {
-	msg.reply(helpInfo);
+	msg.reply({ embeds: [helpInfo] });
 };
 
 module.exports = {

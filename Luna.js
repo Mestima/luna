@@ -59,7 +59,7 @@ bot.on('ready', () => {
 //	askForFir(bot);
 });
 
-bot.on('messageCreate', msg => {
+bot.on('messageCreate', async msg => {
 	var author = msg.author;
 	
 	if (
