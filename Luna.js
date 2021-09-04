@@ -1,6 +1,6 @@
 'use strict';
 
-const Discord = require('discord.js');
+const { Client, Intents, Permissions } = require('discord.js');
 const chalk = require('chalk');
 const gradient = require('gradient-string');
 const pjson	= require("./package.json");
@@ -9,7 +9,7 @@ const { commands } = require('./modules/commands');
 const { helpSetup } = require('./modules/help');
 const { tagSetup } = require('./modules/tags');
 
-const bot = new Discord.Client();
+const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 let prefLen = prefix.length;
 
@@ -43,12 +43,14 @@ bot.on('ready', () => {
 		chalk.hex("#6A54C9").bold.italic("Luna bot is ready\n\n"),
 		`– Bot uses ${chalk.hex("#6A54C9").bold(Object.keys(pjson.dependencies).length)} packages\n`
     ].join("\n\n"));
-	bot.generateInvite(["ADMINISTRATOR"]).then(link => { 
-		console.log([
-			chalk.blue.bold.underline('Bot invite link:'),
-			chalk.blue.bold(link)
-		].join("\n"));
+	const link = bot.generateInvite({
+		permissions: [ Permissions.FLAGS.ADMINISTRATOR ],
+		scopes: [ 'bot' ]
 	});
+	console.log([
+		chalk.blue.bold.underline('Bot invite link:'),
+		chalk.blue.bold(link)
+	].join("\n"));
 	bot.user.setActivity('your bullshit', { type: 'LISTENING' });
 //	bot.user.setStatus('dnd');
 	helpSetup(commands);
@@ -57,7 +59,7 @@ bot.on('ready', () => {
 //	askForFir(bot);
 });
 
-bot.on('message', msg => {
+bot.on('messageCreate', msg => {
 	var author = msg.author;
 	
 	if (
