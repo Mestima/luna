@@ -39,11 +39,8 @@ bot.on('ready', () => {
 		chalk.blue.bold(link)
 	].join("\n"));
 	bot.user.setActivity('your bullshit', { type: 'LISTENING' });
-//	bot.user.setStatus('dnd');
 	helpSetup(commands);
 	tagSetup();
-	
-//	askForFir(bot);
 });
 
 bot.on('messageCreate', async msg => {
