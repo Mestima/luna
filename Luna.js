@@ -13,19 +13,6 @@ const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MES
 
 let prefLen = prefix.length;
 
-/*
- * Joke function to my gf bot
- */
-var askForFir = (cl) => {
-	var FirChannel;
-	cl.channels.fetch('746437632115867658')
-		.then(channel => FirChannel = channel);
-	setInterval(() => {
-		if (FirChannel)
-			FirChannel.send('!ФЫР');
-	}, 15000);
-};
-
 var ASCIIHeader = [
 	"    ___       ___       ___       ___    ",
 	"   /\\__\\     /\\__\\     /\\__\\     /\\  \\   ",
