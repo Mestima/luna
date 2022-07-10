@@ -5,7 +5,6 @@ const { help } = require('./help');
 const pbGet = require('./pastebin');
 const clear = require('./clear');
 const { tag } = require('./tags');
-const play = require('./music');
 const lua = require('./lua');
 // const tgPost = require('./telegraph');
 
