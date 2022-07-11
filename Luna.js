@@ -1,13 +1,12 @@
 'use strict';
 
 const { Client, Intents, Permissions } = require('discord.js');
+const core = require('./core');
 const chalk = require('chalk');
 const gradient = require('gradient-string');
 const pjson	= require("./package.json");
 const { token, prefix } = require('./config.json');
-const { commands } = require('./modules/commands');
-const { helpSetup } = require('./modules/help');
-const { tagSetup } = require('./modules/tags');
+const { commands } = require('./core/commands');
 
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
@@ -39,8 +38,9 @@ bot.on('ready', () => {
 		chalk.blue.bold(link)
 	].join("\n"));
 	bot.user.setActivity('your bullshit', { type: 'LISTENING' });
-	helpSetup(commands);
-	tagSetup();
+	
+	core.modules.load();
+	core.modules.enableAll(commands);
 });
 
 bot.on('messageCreate', async msg => {

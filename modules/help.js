@@ -39,7 +39,17 @@ var help = (msg) => {
 	msg.reply({ embeds: [helpInfo] });
 };
 
+const init = (commands) => {
+	setTimeout(() => {
+		helpSetup(commands);
+	}, 500);
+};
+
 module.exports = {
 	helpSetup: helpSetup,
-	help: help
+	help: help,
+	init: init,
+	commands: {
+		help: {func: (cl, msg, text) => {help(msg);}, desc: 'show help information', category: 'General commands'}
+	}
 };

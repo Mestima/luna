@@ -34,5 +34,13 @@ var clear = (msg, text) => {
 	msg.channel.send({ embeds: [embed] });
 };
 
-module.exports = clear;
+module.exports = {
+	clear: clear,
+	init: (commands) => {},
+	commands: {
+		clear: {func: (cl, msg, text) => {clear(msg, text);}, descExt: [
+			{cmd: 'clear `amount`', desc: 'deletes some messages'}
+		], category: 'Server Admin'}
+	}
+};
 

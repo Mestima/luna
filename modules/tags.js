@@ -1,7 +1,6 @@
 'use strict';
 
 //const { MessageAttachment } = require('discord.js'); // check out comments below
-
 const err = 'You have to specify tag name from the tags list!';
 const tags = {
 	shrug: 'https://i.imgur.com/h1NFcIJ.jpg',
@@ -41,8 +40,19 @@ var tag = (msg, text) => {
 	msg.channel.send(tags[tgName]);
 };
 
+const init = (commands) => {
+	tagSetup();
+};
+
 module.exports = {
 	tag: tag,
-	tagSetup: tagSetup
+	tagSetup: tagSetup,
+	init: init,
+	commands: {
+		tag: {func: (cl, msg, text) => {tag(msg, text);}, descExt: [
+			{cmd: 'tag list', desc: 'show tags list'},
+			{cmd: 'tag `name`', desc: 'send tag'}
+		], category: 'Tags'}
+	}
 };
 
