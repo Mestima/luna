@@ -1,0 +1,5 @@
+{
+	"token": "",			# Discord bot token
+	"prefix": "~",		# Discord bot prefix
+	"modules": "all"	# Modules to load. Might be 'all' or array of module names
+}
