@@ -5,7 +5,7 @@ const core = require('./core');
 const chalk = require('chalk');
 const gradient = require('gradient-string');
 const pjson	= require("./package.json");
-const { token, prefix, modules } = require('./config.json');
+const { token, prefix, modules } = require('./config/config.json');
 const { commands } = require('./core/commands');
 
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });

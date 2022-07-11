@@ -1,7 +1,7 @@
 'use strict';
 
 const PastebinAPI = require('pastebin-js');
-const { pastebinToken } = require('../config.json');
+const { pastebinToken } = require('../config/config.json');
 
 var pb = new PastebinAPI(pastebinToken);
 
