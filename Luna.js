@@ -5,7 +5,7 @@ const core = require('./core');
 const chalk = require('chalk');
 const gradient = require('gradient-string');
 const pjson	= require("./package.json");
-const { token, prefix } = require('./config.json');
+const { token, prefix, modules } = require('./config.json');
 const { commands } = require('./core/commands');
 
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -39,8 +39,16 @@ bot.on('ready', () => {
 	].join("\n"));
 	bot.user.setActivity('your bullshit', { type: 'LISTENING' });
 	
-	core.modules.load();
-	core.modules.enableAll(commands);
+	if (modules != undefined) {
+		core.modules.load();
+		if (modules == 'all') {
+			core.modules.enableAll(commands);
+		} else {
+			modules.forEach((module) => {
+				core.modules.enable(module, commands);
+			});
+		}
+	}
 });
 
 bot.on('messageCreate', async msg => {
