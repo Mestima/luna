@@ -1,5 +1,12 @@
 {
 	"token": "",			# Discord bot token
 	"prefix": "~",		# Discord bot prefix
-	"modules": "all"	# Modules to load. Might be 'all' or array of module names
+	"modules": "all",	# Modules to load. Might be 'all' or array of module names
+	"dbinfo": {
+		"host": "127.0.0.1", # DB host
+		"port": "3306", # DB port
+		"user": "username", # DB username
+		"pass": "super_hard_password", # DB password
+		"db": "mydbname" # DB name
+	}
 }
