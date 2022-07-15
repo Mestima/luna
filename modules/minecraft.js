@@ -48,10 +48,10 @@ const newUser = (msg, text) => {
 			return;
 		}
 		
-		let nick = text[2];
-		let pwd = md5(text[3]);
-		let uid = msg.author.id;
-		let query = `INSERT INTO users (id, nick, password) VALUES ('${uid}', '${nick}', '${pwd}') ON DUPLICATE KEY UPDATE nick = '${nick}', password = '${pwd}'`;
+		let nick = db.escape(text[2]);
+		let pwd = db.escape(md5(text[3]));
+		let uid = db.escape(msg.author.id);
+		let query = `INSERT INTO users (id, nick, password) VALUES (${uid}, ${nick}, ${pwd}) ON DUPLICATE KEY UPDATE nick = ${nick}, password = ${pwd}`;
 		db.query(query, (err, res, fields) => {
 			if (err) {
 				msg.reply('Error! Could not connect to database!');
@@ -89,6 +89,30 @@ const newUser = (msg, text) => {
 			}
 		});
 	}
+	
+	if (text[1] == 'slim') {
+		if (text[2] != 'true' && text[2] != 'false') {
+			msg.reply('You have to specify slim state. See `~help` for more information.');
+			return;
+		}
+		
+		let slim = 0;
+		if (text[2] == 'true') {
+			slim = 1;
+		}
+		slim = db.escape(slim);
+		
+		let uid = db.escape(msg.author.id);
+		let query = `UPDATE users SET slim = ${slim} WHERE id = ${uid}`;
+		db.query(query, (err, res, fields) => {
+			if (err) {
+				msg.reply('Error! Could not connect to database!');
+				console.log(err);
+				return;
+			}
+			msg.reply(`Your skin slim state set to ${text[2]}!`);
+		});
+	}
 };
 
 module.exports = {
@@ -98,6 +122,8 @@ module.exports = {
 			{cmd: 'lc create `nickname` `password`', desc: 'register a new account'},
 		//	{cmd: 'lc newpassword `password`', desc: 'change your password'},
 			{cmd: 'lc skin (drop your skin.png)', desc: 'upload skin'},
+			{cmd: 'lc slim `true`', desc: 'set skin model slim'},
+			{cmd: 'lc slim `false`', desc: 'set skin model not slim'}
 		], category: 'LisoCraft'}
 	}
 };
