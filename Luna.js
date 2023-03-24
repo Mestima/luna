@@ -1,6 +1,6 @@
 'use strict';
 
-const { Client, Intents, Permissions } = require('discord.js');
+const { Client, ActivityType, GatewayIntentBits, PermissionsBitField } = require('discord.js');
 const core = require('./core');
 const chalk = require('chalk');
 const gradient = require('gradient-string');
@@ -8,7 +8,13 @@ const pjson	= require("./package.json");
 const { token, prefix, modules } = require('./config/config.json');
 const { commands } = require('./core/commands');
 
-const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const bot = new Client({
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent
+	]
+});
 
 let prefLen = prefix.length;
 
@@ -29,15 +35,21 @@ bot.on('ready', () => {
 		chalk.hex("#6A54C9").bold.italic("Luna bot is ready\n\n"),
 		`– Bot uses ${chalk.hex("#6A54C9").bold(Object.keys(pjson.dependencies).length)} packages\n`
     ].join("\n\n"));
+	
 	const link = bot.generateInvite({
-		permissions: [ Permissions.FLAGS.ADMINISTRATOR ],
+		permissions: [ PermissionsBitField.Flags.Administrator ],
 		scopes: [ 'bot' ]
 	});
+	
 	console.log([
 		chalk.blue.bold.underline('Bot invite link:'),
 		chalk.blue.bold(link)
 	].join("\n"));
-	bot.user.setActivity('your bullshit', { type: 'LISTENING' });
+	
+	bot.user.setPresence({
+		activities: [{ name: 'your bullshit', type: ActivityType.Listening }],
+		status: 'idle'
+	});
 	
 	if (modules != undefined) {
 		core.modules.load();
@@ -57,7 +69,6 @@ bot.on('messageCreate', async msg => {
 	if (
 		author.bot
 	) return;
-	
 	let text = msg.content.split(' ');
 	let isPrefix = text[0].substring(0, prefLen) === prefix;
 	let cmdObj = commands[text[0].slice(prefLen).toLowerCase()];

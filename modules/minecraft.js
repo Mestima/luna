@@ -24,7 +24,7 @@ const db = sql.createConnection({
 db.connect((err) => {
 	if (err) {
 		console.log(chalk.hex("#ff2200").bold("DB Error: could not connect to database!"));
-		console.log(err);
+		//console.log(err);
 		return;
 	}
 	

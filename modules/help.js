@@ -1,6 +1,6 @@
 'use strict';
 
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const { prefix } = require('../config/config.json');
 
 var helpInfo;
@@ -18,7 +18,7 @@ var helpSetup = (cmds) => {
 		else
 			data[v.category].push([k, v.desc]); // command name and description
 	}
-	var embed = new MessageEmbed()
+	var embed = new EmbedBuilder()
 		.setTitle('Help')
 		.setDescription('List and description of all bot commands')
 		.setColor(16711680)
