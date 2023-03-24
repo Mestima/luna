@@ -22,16 +22,19 @@ var helpSetup = (cmds) => {
 		.setTitle('Help')
 		.setDescription('List and description of all bot commands')
 		.setColor(16711680)
-		.setFooter('Luna')
+		.setFooter({ text: 'Luna' })
 		.setTimestamp()
 		.setThumbnail('https://i.imgur.com/UH5n0Iq.png');
+	
+	let fields = [];
 	for (let k in data) {
 		let content = '';
 		data[k].forEach(v => {
 			content += prefix + v[0] + ' - ' + v[1] + '\n';
 		});
-		embed.addField(k, content, false);
+		fields.push({ name: k, value: content, inline: false });
 	}
+	embed.addFields(fields);
 	helpInfo = embed;
 };
 
