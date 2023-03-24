@@ -18,9 +18,13 @@ const enable = (name, commands) => {
 		const module = require(`../modules/${name}`);
 		Object.keys(module.commands).forEach((key) => {
 			commands[key] = module.commands[key];
-			module.init(commands);
+			try {
+				module.init(commands);
+				process.stdout.write(chalk.hex("#00ff44").bold(" Done!\n"));
+			} catch (err) {
+				process.stdout.write(chalk.hex("#ff2200").bold(" Failed!\n"));
+			}
 		});
-		process.stdout.write(chalk.hex("#00ff44").bold(" Done!\n"));
 	} else {
 		process.stdout.write(chalk.hex("#ff2200").bold(" Failed: module not found!\n"));
 	}
