@@ -1,12 +1,12 @@
 'use strict';
 
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 var clear = (msg, text) => {
 	if (!msg.guild)
 		return msg.reply('You can\'t use this command in direct messages!');
 	
-	if (!msg.member.permissions.has("ADMINISTRATOR"))
+	if (!msg.member.permissions.has('ADMINISTRATOR'))
 		return msg.reply('You have to be a server admin to use this command!');
 	
 	let amount = text[1];
@@ -25,11 +25,11 @@ var clear = (msg, text) => {
 			msg.channel.bulkDelete(messages);
 		});
 	
-	var embed = new MessageEmbed()
+	var embed = new EmbedBuilder()
 		.setTitle(`Deleted ${amount} messages in total`)
 		.setColor(msg.member.displayHexColor)
 //		.setFooter('Luna')
-//		.setTimestamp()
+		.setTimestamp()
 		
 	msg.channel.send({ embeds: [embed] });
 };
