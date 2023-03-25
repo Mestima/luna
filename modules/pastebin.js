@@ -62,7 +62,7 @@ module.exports = {
 	pastebin,
 	init: (commands) => {},
 	commands: {
-		pastebin: {func: (cl, msg, text) => {pbGet(msg, text);}, descExt: [
+		pastebin: {func: (cl, msg, text) => {pastebin(msg, text);}, descExt: [
 			{cmd: 'pastebin get `id`', desc: 'show paste from pastebin by id'},
 			{cmd: 'pastebin post `name` `your text`', desc: 'used to post your text to pastebin. (If you want to make a space in the paste name, use the symbol "-" instead of the space)'}
 		], category: 'PasteBin'}
