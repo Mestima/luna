@@ -29,7 +29,7 @@ var clear = (msg, text) => {
 		.setTitle(`Deleted ${amount} messages in total`)
 		.setColor(msg.member.displayHexColor)
 //		.setFooter('Luna')
-		.setTimestamp()
+//		.setTimestamp()
 		
 	msg.channel.send({ embeds: [embed] });
 };
